@@ -1,11 +1,11 @@
-#' Format a number to EUR
+#' Convert
 #' @param x number
 #' @return string with euro
 #' @export
 #' @importFrom scales dollar
 #' @examples string with the eur
-#' euro(42)
-#' (euro(4200000))
+#' exchange_rate_function(42)
+#' (exchange_rate_function(4200))
 
 library(binancer)
 library(httr)
@@ -13,6 +13,12 @@ library(data.table)
 library(logger)
 library(checkmate)
 library(jsonlite)
+library(scales)
+
+euro<-function(x) {
+  dollar(x, prefix = "€")
+}
+
 
 exchange_rate_function <- function() {
   number <- as.numeric(readline("Enter the number of BTC: "))
@@ -32,10 +38,12 @@ exchange_rate_function <- function() {
   # Calculate the value of Bitcoin in EUR
   value <- number * btcusdt * usdeur
   print("Value of Bitcoin in EUR:")
-  print(value)
+  print(euro(value))
   # Clean memory
   rm(number, coin_prices, rates, usdeur, value)
 }
 
+
 exchange_rate_function()
+
 
