@@ -1,7 +1,9 @@
 #' Format a number
+#' Format a number to EUR
 #' @param x number
 #' @return string with euro
 #' @export
+#' @importFrom scales dollar
 #' @importFrom scales dollar
 #' @examples string with the eur
 #' euro(42)

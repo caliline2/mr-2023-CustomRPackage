@@ -1,13 +1,20 @@
 Package: mr
 Type: Package
-Title: What the Package Does (Title Case)
+Title: BTC Euro converter
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Jana Hochel
+Maintainer: The package maintainer <hochel_jana@student.ceu.edu>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: scales
 RoxygenNote: 7.2.3
+Imports:
+    scales,
+    binancer,
+    httr,
+    data.table,
+    logger,
+    checkmate,
+    jsonlite
