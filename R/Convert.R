@@ -1,5 +1,9 @@
 #' Convert
 #' @param x number
+#' @param btcusdt The BTC/USDT exchange rate
+#' @param usdeur The USD/EUR exchange rate
+#' @param bitcoins The amount of bitcoins
+#' @param exchangerate Value of bitcoin in EUR
 #' @return string with euro
 #' @export
 #' @importFrom scales dollar
@@ -19,31 +23,35 @@ euro<-function(x) {
   dollar(x, prefix = "€")
 }
 
+rates <- fromJSON('https://api.exchangerate.host/latest?base=USD&symbols=EUR')
+usdeur <- rates$rates$EUR
 
-exchange_rate_function <- function() {
-  number <- as.numeric(readline("Enter the number of BTC: "))
+# Return prices of Bitcoin in dollars
+coin_prices <- binance_coins_prices()
+btcusdt <- coin_prices[symbol == 'BTC', usd]
+get_bitcoin_price<-btcusdt
 
-  # Return prices of Bitcoin in dollars
-  coin_prices <- binance_coins_prices()
-  btcusdt <- coin_prices[symbol == 'BTC', usd]
+
+exchangerate <- function() {
+  bitcoins <- as.numeric(readline("Enter the number of BTC: "))
+
   print("Prices of Crypto in dollars:")
   print(coin_prices)
 
   # Retrieve the exchange rate
-  rates <- fromJSON('https://api.exchangerate.host/latest?base=USD&symbols=EUR')
-  usdeur <- rates$rates$EUR
   print("Exchange rate (USD/EUR):")
   print(usdeur)
 
+
   # Calculate the value of Bitcoin in EUR
-  value <- number * btcusdt * usdeur
+  value <- bitcoins * btcusdt * usdeur
   print("Value of Bitcoin in EUR:")
   print(euro(value))
+
   # Clean memory
-  rm(number, coin_prices, rates, usdeur, value)
+  rm(bitcoins, coin_prices, rates, usdeur, value)
 }
 
 
 exchange_rate_function()
-
 
