@@ -8,8 +8,8 @@
 #' @export
 #' @importFrom scales dollar
 #' @examples string with the eur
-#' exchange_rate_function(42)
-#' (exchange_rate_function(4200))
+#' exchangerate(42)
+#' (exchangerate(4200))
 
 library(binancer)
 library(httr)
@@ -42,16 +42,18 @@ exchangerate <- function() {
   print("Exchange rate (USD/EUR):")
   print(usdeur)
 
+  print("Value of Bitcoin in dollars:")
+  print(get_bitcoin_price)
 
   # Calculate the value of Bitcoin in EUR
   value <- bitcoins * btcusdt * usdeur
   print("Value of Bitcoin in EUR:")
   print(euro(value))
 
-  # Clean memory
-  rm(bitcoins, coin_prices, rates, usdeur, value)
+# Clean memory
+# rm(bitcoins, coin_prices, rates, usdeur, value)
 }
 
 
-exchange_rate_function()
+exchangerate()
 
